@@ -1,0 +1,9 @@
+# 1주차는 Qdrant 로컬 파일 모드로 동작하므로 Docker가 없어도 된다.
+# Docker를 설치한 뒤에는 `docker compose up -d` 후 .env에 SHOP_QDRANT_URL=http://localhost:6333 을 넣으면 서버 모드로 전환된다.
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.12.4
+    ports:
+      - "6333:6333"
+    volumes:
+      - ./qdrant_storage:/qdrant/storage
