@@ -71,7 +71,13 @@ def cmd_ask(settings, question: str) -> None:
     from shop_agent.llm.generator import AnswerGenerator
     from shop_agent.pipeline import RagPipeline
 
-    generator = AnswerGenerator(settings.llm_model, settings.llm_effort, settings.llm_max_tokens)
+    key = settings.anthropic_api_key
+    generator = AnswerGenerator(
+        settings.llm_model,
+        settings.llm_effort,
+        settings.llm_max_tokens,
+        api_key=key.get_secret_value() if key else None,
+    )
     pipeline = RagPipeline(_embedder(settings), _store(settings), generator, settings.top_k)
 
     started = time.perf_counter()

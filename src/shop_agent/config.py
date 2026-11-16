@@ -7,6 +7,7 @@ Spring의 application.yml + @ConfigurationProperties 역할이다.
 from functools import lru_cache
 from pathlib import Path
 
+from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -16,6 +17,9 @@ class Settings(BaseSettings):
     )
 
     # LLM
+    # 이 값만 SHOP_ 접두사 없이 표준 이름(ANTHROPIC_API_KEY)으로 읽는다.
+    # SecretStr: print나 로그에 찍혀도 '**********'로 가려진다.
+    anthropic_api_key: SecretStr | None = Field(default=None, validation_alias="ANTHROPIC_API_KEY")
     llm_model: str = "claude-sonnet-5-5"
     llm_effort: str = "low"  # 검색 결과 기반 짧은 답변이라 low로 충분하다
     llm_max_tokens: int = 4000

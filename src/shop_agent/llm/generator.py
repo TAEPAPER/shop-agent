@@ -39,9 +39,11 @@ class Answer:
 
 
 class AnswerGenerator:
-    def __init__(self, model: str, effort: str = "low", max_tokens: int = 4000):
-        # API 키는 환경변수 ANTHROPIC_API_KEY(.env)에서 자동으로 읽는다. 코드에 키를 넣지 않는다.
-        self.client = anthropic.Anthropic()
+    def __init__(
+        self, model: str, effort: str = "low", max_tokens: int = 4000, api_key: str | None = None
+    ):
+        # api_key가 None이면 SDK가 환경변수 ANTHROPIC_API_KEY를 찾는다. 코드에 키를 직접 쓰지 않는다.
+        self.client = anthropic.Anthropic(api_key=api_key)
         self.model = model
         self.effort = effort
         self.max_tokens = max_tokens
