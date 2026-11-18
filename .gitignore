@@ -14,6 +14,9 @@ build/
 # local data / indexes (원본 데이터와 인덱스는 커밋하지 않는다. 샘플만 커밋)
 data/*
 !data/sample/
+# 정답셋은 커밋한다(테스트 픽스처). 평가 실행 결과는 커밋하지 않는다.
+!data/eval/
+data/eval/runs/
 qdrant_storage/
 
 # ide

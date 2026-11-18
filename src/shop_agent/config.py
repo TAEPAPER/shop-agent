@@ -41,6 +41,9 @@ class Settings(BaseSettings):
     # 검색
     top_k: int = 5
 
+    # 평가 (3강)
+    golden_path: Path = Path("data/eval/golden.jsonl")
+
 
 @lru_cache
 def get_settings() -> Settings:
